@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Company Statistics | {{ page_title|title }}
+        {% endblock %}
+    </title>
+    {% block css %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700&amp;subset=cyrillic"
+              rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+    {% block js %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    {% endblock %}
+    {% include 'material/includes/material_css.html' %}
+    {% include 'material/includes/material_js.html' %}
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="top">
+        <div class="container">
+            {% block container %}
+            {% endblock %}
+        </div>
+    </div>
+    {% block footer %}
+        <footer class="footer padding-site">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p class="footer-bottom-text">© Copyright - INTERIOR 2016. All Rights Reserved.</p>
+{#                    <p class="footer-bottom-text">Today is {{ today | date:"d.m.Y" }}</p>#}
+                    <p class="footer-bottom-text">Today is {% now "d.m.Y" %}</p>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+</div>
+</body>
+
+</html>
