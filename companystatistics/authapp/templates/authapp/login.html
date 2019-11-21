@@ -1,0 +1,14 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+        {{ login_form.as_p }}
+        <br>
+        <input class="form-control" type="submit" value="login">
+    </form>
+    <p><a href="{% url 'authapp:password_reset' %}">Forgotten your password?</a></p>
+{% endblock %}

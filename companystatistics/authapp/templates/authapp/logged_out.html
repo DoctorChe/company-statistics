@@ -1,0 +1,8 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+    <div class="module">
+        <p>You have been successfully logged out.
+            You can <a href="{% url 'authapp:login' %}">login again</a>.</p>
+    </div>
+{% endblock %}

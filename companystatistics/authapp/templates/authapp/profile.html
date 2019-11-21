@@ -1,0 +1,9 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'authapp:profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ edit_form.as_p }}
+        {{ profile_form.as_p }}
+    </form>
+{% endblock %}
