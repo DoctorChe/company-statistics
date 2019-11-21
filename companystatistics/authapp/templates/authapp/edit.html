@@ -1,0 +1,13 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'authapp:edit' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ edit_form.as_p }}
+        {{ profile_form.as_p }}
+        <input class="form-control" type="submit" value="save">
+    </form>
+    <a href="{% url 'main:index' %}" class="form-control last btn btn-round">
+        home
+    </a>
+{% endblock %}
