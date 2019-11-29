@@ -1,8 +1,9 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
+    <h2>{{ page_title|title }}</h2>
     <div class="module">
-        <p>You have been successfully logged out.
-            You can <a href="{% url 'authapp:login' %}">login again</a>.</p>
+        <p>Вы успешно вышли из своей учётной записи.
+            Вы можете <a href="{% url 'authapp:login' %}">войти снова</a>.</p>
     </div>
 {% endblock %}

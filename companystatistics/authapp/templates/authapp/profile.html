@@ -1,9 +1,12 @@
 {% extends 'mainapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_tags %}
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'authapp:profile' %}" method="post" enctype="multipart/form-data">
+    <h2>{{ page_title|title }}</h2>
+    <form class="form-horizontal" action="{% url 'authapp:profile' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ edit_form.as_p }}
-        {{ profile_form.as_p }}
+        {{ edit_form|crispy }}
+        {{ profile_form|crispy }}
     </form>
 {% endblock %}

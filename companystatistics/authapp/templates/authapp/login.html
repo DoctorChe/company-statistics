@@ -1,6 +1,7 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
+    <h2>{{ page_title|title }}</h2>
     <form class="form-horizontal" method="post">
         {% csrf_token %}
         {% if next %}
@@ -8,7 +9,7 @@
         {% endif %}
         {{ login_form.as_p }}
         <br>
-        <input class="form-control" type="submit" value="login">
+        <input class="form-control" type="submit" value="Войти">
     </form>
-    <p><a href="{% url 'authapp:password_reset' %}">Forgotten your password?</a></p>
+    <p><a href="{% url 'authapp:password_reset' %}">Забыли ваш пароль?</a></p>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 import django.forms as forms
 
+from statapp.models import Department
 from .models import User, UserProfile
 
 
@@ -45,3 +46,8 @@ class UserProfileEditForm(forms.ModelForm):
         super(UserProfileEditForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+
+# class DepartmentEnrollForm(forms.Form):
+#     department = forms.ModelChoiceField(queryset=Department.objects.all(),
+#                                         widget=forms.HiddenInput)
