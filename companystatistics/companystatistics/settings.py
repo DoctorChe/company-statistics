@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -31,14 +34,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mainapp',
+    'authapp',
+    'statapp',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainapp',
-    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'companystatistics.urls'
+
+# TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 TEMPLATES = [
     {
@@ -105,7 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Europe/Moscow'
@@ -128,8 +136,8 @@ STATICFILES_DIRS = (
 
 AUTH_USER_MODEL = 'authapp.User'
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/auth/login/'
+# LOGIN_REDIRECT_URL = reverse_lazy('department_list')
+LOGIN_URL = '/authapp/login/'
 # LOGIN_ERROR_URL = '/'
 # LOGOUT_REDIRECT_URL = ''
 
@@ -143,3 +151,5 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'authapp.authentication.EmailAuthBackend',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
