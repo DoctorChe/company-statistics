@@ -1,2 +1,4 @@
 django
+django-braces
+django-crispy-forms
 # django-material
