@@ -1,4 +1,5 @@
 {% extends 'mainapp/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h2>{{ page_title|title }}</h2>
@@ -7,9 +8,9 @@
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
-        {{ login_form.as_p }}
+        {{ login_form|crispy }}
         <br>
-        <input class="form-control" type="submit" value="Войти">
+        <input class="form-control btn btn-primary" type="submit" value="Войти" >
     </form>
-    <p><a href="{% url 'authapp:password_reset' %}">Забыли ваш пароль?</a></p>
+    <p><a href="{% url 'authapp:password_reset' %}" class="btn btn-link">Забыли ваш пароль?</a></p>
 {% endblock %}
