@@ -73,6 +73,7 @@ def stat_edit(request, stat_id):
     context = {
         'form': form,
         'stat_title': stat.title,
+        'object': stat,
     }
     return render(request, 'statapp/stat/form.html', context)
 
