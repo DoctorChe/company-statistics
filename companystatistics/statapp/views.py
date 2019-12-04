@@ -39,10 +39,6 @@ class DepartmentDetailView(LoginRequiredMixin, DetailView):
         context['stat_titles'] = stat_titles
         context['stats'] = stats
 
-        # print(stats)
-        customers = 10
-        context['data'] = customers
-
         return context
 
 
@@ -103,9 +99,17 @@ def stat_title_create(request, department_id=None):
         return render(request, 'statapp/stat_title/form.html', context)
 
 
-# def get_data(request, *args, **kwargs):
-#     data = {
-#         'sales': 100,
-#         'customers': 10,
-#     }
-#     return JsonResponse(data)
+def get_data(request, *args, **kwargs):
+    stats = Stat.objects.all()
+
+    stats_dict = {str(StatTitle.objects.filter(title=stat.title).first().id): {'default': [], 'labels': []} for stat in
+                  stats}
+
+    for stat in stats:
+        stats_dict[str(StatTitle.objects.filter(title=stat.title).first().id)]['default'].append(float(stat.amount))
+        stats_dict[str(StatTitle.objects.filter(title=stat.title).first().id)]['labels'].append(str(stat.date))
+    data = {
+        'stats_dict': stats_dict,
+    }
+
+    return JsonResponse(data)
