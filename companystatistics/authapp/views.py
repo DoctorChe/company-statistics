@@ -33,7 +33,7 @@ def user_login(request):
         login_form = UserLoginForm()
 
     context = {
-        'page_title': 'login',
+        'page_title': 'вход',
         'login_form': login_form,
         'next': next,
     }
@@ -43,7 +43,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     context = {
-        'page_title': 'logged out',
+        'page_title': 'выход',
     }
     return render(request, 'authapp/logged_out.html', context)
 
@@ -76,7 +76,7 @@ def user_edit(request):
 
 @login_required
 def user_profile(request):
-    title = 'profile'
+    title = 'профиль'
 
     if request.method == 'POST':
         edit_form = UserEditForm(request.POST, request.FILES, instance=request.user)

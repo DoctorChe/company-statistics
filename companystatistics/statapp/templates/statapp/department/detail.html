@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-9">
                 {% for stat_title in stat_titles %}
                     <div class="row">
                         <div class="col-12">
@@ -55,7 +55,7 @@
                                                 {% for s in stats %}
                                                     {% if s.title == stat_title %}
                                                         <li class="list-group-item">
-                                                            {{ s.amount }} - {{ s.date }} ({{ s.owner }})
+                                                            {{ s.date }} - {{ s.amount }} ({{ s.owner }})
                                                             <a href="{% url "statapp:stat_edit" s.id %}"
                                                                class="btn btn-link">
                                                                 Изменить данные
