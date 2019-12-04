@@ -84,4 +84,14 @@
 
         {% endwith %}
     </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+
+        var data = parseInt('{{ data }}');
+        console.log(data);
+
+    </script>
 {% endblock %}
