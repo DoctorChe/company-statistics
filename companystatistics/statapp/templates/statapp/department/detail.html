@@ -46,11 +46,20 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3>{{ stat_title }}</h3>
+                                    <h3>
+                                        {#                                        {{ stat_title }} <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Скрыть/Показать</a>#}
+                                        {{ stat_title }} <a class="btn btn-link" data-toggle="collapse"
+                                                            href="#collapse{{ stat_title.id }}" role="button"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapse{{ stat_title.id }}">Скрыть/Показать</a>
+                                    </h3>
+
                                 </div>
                                 <div class="card-body">
-                                    <ul class="list-group">
-                                        {% if request.user.is_staff %}
+                                    {% if request.user.is_staff %}
+                                        {#                                            <div class="collapse" id="collapseExample">#}
+                                        <div class="collapse" id="collapse{{ stat_title.id }}">
+                                            <canvas id="myChart{{ stat_title.id }}" width="400" height="150"></canvas>
                                             <ul class="list-group">
                                                 {% for s in stats %}
                                                     {% if s.title == stat_title %}
@@ -64,11 +73,12 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             </ul>
-                                        {% endif %}
-                                        <a href="{% url "statapp:stat_create" stat_title.id %}"
-                                           class="btn btn-primary mt-3">
-                                            Добавить данные
-                                        </a>
+                                        </div>
+                                    {% endif %}
+                                    <a href="{% url "statapp:stat_create" stat_title.id %}"
+                                       class="btn btn-primary mt-3">
+                                        Добавить данные
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -84,4 +94,49 @@
 
         {% endwith %}
     </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var endpoint = '/stat/api/data/';
+        var stats_dict = {};
+        $.ajax({
+            method: 'GET',
+            url: endpoint,
+            success: function (data) {
+                stats_dict = data.stats_dict;
+                setCart()
+            },
+            error: function (error_data) {
+                console.log('error');
+                console.log(error_data);
+            }
+        });
+
+        function setCart() {
+            for (let statTitleId in stats_dict) {
+                var ctx = document.getElementById('myChart' + statTitleId);
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: stats_dict[statTitleId].labels,
+                        datasets: [{
+                            label: 'Выручка',
+                            data: stats_dict[statTitleId].default,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                })
+            }
+        }
+    </script>
 {% endblock %}

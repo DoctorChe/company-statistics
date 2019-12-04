@@ -35,9 +35,12 @@
     </div>
 </main>
 
-{% include 'mainapp/includes/footer.html' %}
+{#{% include 'mainapp/includes/footer.html' %}#}
 
 {% include 'mainapp/includes/js.html' %}
+
+{% block javascript %}
+{% endblock %}
 
 </body>
 </html>

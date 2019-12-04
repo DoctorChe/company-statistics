@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateResponseMixin, View
@@ -37,6 +38,7 @@ class DepartmentDetailView(LoginRequiredMixin, DetailView):
         stats = Stat.objects.all()
         context['stat_titles'] = stat_titles
         context['stats'] = stats
+
         return context
 
 
@@ -95,3 +97,19 @@ def stat_title_create(request, department_id=None):
             'department': department,
         }
         return render(request, 'statapp/stat_title/form.html', context)
+
+
+def get_data(request, *args, **kwargs):
+    stats = Stat.objects.all()
+
+    stats_dict = {str(StatTitle.objects.filter(title=stat.title).first().id): {'default': [], 'labels': []} for stat in
+                  stats}
+
+    for stat in stats:
+        stats_dict[str(StatTitle.objects.filter(title=stat.title).first().id)]['default'].append(float(stat.amount))
+        stats_dict[str(StatTitle.objects.filter(title=stat.title).first().id)]['labels'].append(str(stat.date))
+    data = {
+        'stats_dict': stats_dict,
+    }
+
+    return JsonResponse(data)

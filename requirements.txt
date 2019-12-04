@@ -1,6 +1,5 @@
-django
+django<3
 django-braces
 django-crispy-forms
 django-extensions
 pydotplus
-# django-material
